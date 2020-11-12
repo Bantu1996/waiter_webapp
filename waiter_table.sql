@@ -1,3 +1,4 @@
+
 create table shifts(
 id serial not null primary key,
 days text not null

@@ -1,41 +1,120 @@
-// let express = require('express');
+const Caffine = require('./waiterJS');
 // let app = express();
 const flash = require('express-flash');
 const session = require('express-session');
 const express = require('express');
 const bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+const pg = require("pg");
+const Pool = pg.Pool;
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://bantu:s0ty@t0b@n2@localhost:5432/waiters_db';
+
+const pool = new Pool({
+  connectionString
+});
+
+const coffee = Caffine(pool);
+// const route = routes(register)
+
 var app = express();
 
-const exphbs  = require('express-handlebars');
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
+
 app.use(session({
-  secret : "<add a secret string here>",
+  secret: "Please enter number!!",
   resave: false,
   saveUninitialized: true
 }));
 
-// initialise the flash middleware
 app.use(flash());
 
-
-
-app.get('/addFlash', function (req, res) {
+app.get('/addFlash', async function (req, res) {
   req.flash('info', 'Flash Message Added');
   res.redirect('/');
 });
 
-app.get("/", function(req, res){
-    res.send("Bill Settings WebApp");
-  });
-let PORT = process.env.PORT || 3007;
-
-app.listen(PORT, function(){
-  console.log('App starting on port', PORT);
+app.get("/", async function (req, res) {
+  res.render('index');
 });
+app.get("/index", async function (req, res) {
+  res.redirect('/')
+ })
+
+
+app.get("/admin", async function (req, res) {
+  // var user = req.params.username;
+  var id = req.query.id
+  var data =   await coffee.getAdminId()
+  var sevenNights = await coffee.sevenDays()
+
+  // if(data){
+    
+  // }
+  console.log( data);
+  
+  res.render('admin',{
+    data,sevenNights} )
+})
+
+app.get("/waiter/", async function (req, res) {
+  res.render('waiter')
+})
+app.get("/waiter/:username", async function (req, res) {
+  var user = req.params.username
+  res.render('waiter', {
+   username: user
+   })
+})
+
+app.post("/waiter/:username", async function (req, res) {
+  var boxes = req.body.checks
+  var user = req.params.username
+  console.log({ boxes, user });
+  // var update = await coffee.nameUpdate(user)
+  var sub = await coffee.selectShift(boxes, user)
+  console.log(
+    { sub }
+  );
+
+  if (sub === boxes) {
+    await coffee.getAdminId()
+  }else{
+  req.flash('success', 'Successfully submitted a shift')
+  
+  res.render('waiter', {
+    username: user,
+    sub
+  });
+}
+});
+
+app.get("/resetPer", async function (req, res) {
+  var id = req.query.id  
+  var data = await coffee.resetPer(id)
+
+    req.flash('success', 'Successfully cleared a Waiter on the list')
+  res.render('admin', {data})
+})
+
+  app.get("/reset", async function (req, res) {
+    await coffee.reset(),
+      req.flash('success', 'Successfully cleared the Waiters list')
+    res.redirect('/admin')
+  })
+
+
+
+  // resetPer
+
+  let PORT = process.env.PORT || 3007;
+
+  app.listen(PORT, function () {
+    console.log('App starting on port', PORT);
+  });

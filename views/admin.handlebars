@@ -1,0 +1,77 @@
+<div class="row">
+  <h1>Monate Café</h1>
+  <br>
+  <h2>Administration Section</h2>
+  <br>
+  <div class="rstMessage">
+    <h1> {{messages.success}}</h1>
+
+
+  </div>
+
+  {{!-- <h1>{{this.username}}</h1> --}}
+  <table style="width:100%" class="tables">
+    <thead>
+        <tr>
+      {{#each sevenNights}}
+       <th>{{this.days}}</th>
+       {{/each}}
+    </tr>
+    </thead>
+  <tbody>
+    
+  </tbody>
+    <tr>
+      {{#each data}}
+
+     <td>
+       <li>
+         {{this.waiters_names}}<a href="/resetPer"><button class="btn"><i class="fa fa-close"></i></button></a>
+         </li>
+         </td>
+      {{/each}}
+    </tr>
+  
+  </table>
+
+
+
+
+{{!-- 
+ <table style="width:100%" class="tables">
+  <thead>
+    <tr>
+     {{#each sevenNights}}
+     <th>{{this.days}}</th>
+     {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{#each data}}
+      <td>
+        <ul>
+          {{#each data}}
+          <li>
+            {{this.waiters_names}}
+          </li>
+          {{/each}}
+        </ul>
+
+      </td>
+      {{/each}}
+    </tr>
+  </tbody>
+</table> --}}
+
+
+
+  <a href="/reset"><button class="resetBtn" on type="button" name="button">Clear List</button></a>
+  <a href="/index"><button class="hometBtn" on type="button" name="button">Homepage</button></a>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,61 @@
+<div class="row">
+    <h1>Monate Café</h1>
+
+    <h2>Employee Section</h2>
+
+    <div class="notification">
+
+    </div>
+    {{!-- <div class="entry">
+        <h1> {{messages.error}}</h1>
+    </div> --}}
+    <div class="rstMessage">
+        <h1> {{messages.success}}</h1>
+    </div>
+    {{!-- <div class="sis">
+        {{messages.regError}}
+    </div> --}}
+
+
+    <form action="/waiter/{{username}}" method="POST">
+
+        <input type="checkbox" value="Monday"  class="check" name="checks">Monday
+        <input type="checkbox" value="Tuesday" class="check" name="checks">Tuesday
+        <input type="checkbox" value="Wednesday" class="check" name="checks">Wednesday
+        <input type="checkbox" value="Thursday" class="check" name="checks">Thursday
+        <input type="checkbox" value="Friday" class="check" name="checks">Friday
+        <input type="checkbox" value="Saturday" class="check" name="checks">Saturday
+        <input type="checkbox" value="Sunday" class="check" name="checks">Sunday
+
+        </label>
+        <br>
+        <br>
+        <br>
+        <a href=""><button type="submit" class="subButn">Submit</button></a>
+
+    </form>
+    {{!-- <form action="/filter" method="POST">
+        <strong>Filter:</strong>
+        <input class="towns" name="placesFilter" type="radio" value="All">Show All
+        <input class="towns" name="placesFilter" type="radio" value="CY">Bellville
+        <input class="towns" name="placesFilter" type="radio" value="CJ">Paarl
+        <input class="towns" name="placesFilter" type="radio" value="CA">Cape Town
+        <button type="submit" class="filBtn">Filter</button>
+    </form> --}}
+
+    <a href="/index"><button class="hometBtn" on type="button" name="button">Homepage</button></a>
+    <br>
+    <br>
+    <hr>
+
+
+    <h1>{{username}}</h1>
+    {{!-- {{#each d}}
+    <div class="regNumbersList">
+        <li>
+            {{this.days}}
+        </li>
+    </div>
+    {{/each}} --}}
+
+</div>
