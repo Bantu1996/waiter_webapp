@@ -1,5 +1,6 @@
 <div class="row">
   <h1>Monate Café</h1>
+  <p>Where Coffee tastes like Coffee</p>
   <br>
   <h2>Administration Section</h2>
   <br>
@@ -10,35 +11,40 @@
   </div>
 
   {{!-- <h1>{{this.username}}</h1> --}}
-  <table style="width:100%" class="tables">
+   <table style="width:100%" class="tables">
     <thead>
-        <tr>
-      {{#each sevenNights}}
-       <th>{{this.days}}</th>
-       {{/each}}
+    <tr>
+       {{#each sevenNights}} 
+      <th> {{this.days}}</th>
     </tr>
+    
+       
     </thead>
   <tbody>
-    
-  </tbody>
-    <tr>
-      {{#each data}}
+      <tr>
 
      <td>
+         {{#each this.waiters}}
        <li>
-         {{this.waiters_names}}<a href="/resetPer"><button class="btn"><i class="fa fa-close"></i></button></a>
-         </li>
-         </td>
+       {{this.waiters_names}}  
+        {{!-- <a href="/resetPer"><button class="btn"><i class="fa fa-close"></i>{{data}}</button></a> --}}
+       </li>
+         
+       
       {{/each}}
+         </td>
     </tr>
+      {{/each}}
+  </tbody>
+  
   
   </table>
 
 
 
 
-{{!-- 
- <table style="width:100%" class="tables">
+
+ {{!-- <table style="width:100%" class="tables">
   <thead>
     <tr>
      {{#each sevenNights}}
@@ -48,10 +54,10 @@
   </thead>
   <tbody>
     <tr>
-      {{#each data}}
+      {{#each this.waiters}}
       <td>
         <ul>
-          {{#each data}}
+          {{#each this.waiters}}
           <li>
             {{this.waiters_names}}
           </li>
@@ -62,7 +68,7 @@
       {{/each}}
     </tr>
   </tbody>
-</table> --}}
+</table>  --}}
 
 
 

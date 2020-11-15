@@ -1,5 +1,6 @@
 <div class="row">
     <h1>Monate Café</h1>
+    <p>Where Coffee tastes like Coffee</p>
 
     <h2>Employee Section</h2>
 
@@ -10,7 +11,8 @@
         <h1> {{messages.error}}</h1>
     </div> --}}
     <div class="rstMessage">
-        <h1> {{messages.success}}</h1>
+        {{!-- <h2>{{messages}}</h2> --}}
+        <h2> {{messages.success}}</h2>
     </div>
     {{!-- <div class="sis">
         {{messages.regError}}
@@ -19,15 +21,22 @@
 
     <form action="/waiter/{{username}}" method="POST">
 
-        <input type="checkbox" value="Monday"  class="check" name="checks">Monday
-        <input type="checkbox" value="Tuesday" class="check" name="checks">Tuesday
-        <input type="checkbox" value="Wednesday" class="check" name="checks">Wednesday
-        <input type="checkbox" value="Thursday" class="check" name="checks">Thursday
-        <input type="checkbox" value="Friday" class="check" name="checks">Friday
-        <input type="checkbox" value="Saturday" class="check" name="checks">Saturday
-        <input type="checkbox" value="Sunday" class="check" name="checks">Sunday
+{{!-- <input type="checkbox" name="check" class="check"> --}}
+{{#each sevenNights}}  
+{{!-- {{sevenNights.days}} --}}
+{{!-- {{/each}} --}}
+{{!-- </input> --}}
+         <input type="checkbox" value="{{this.days}}"  class="check" name="checks">
+        <span > {{this.days}}</span>
+        {{/each}}
+        {{!-- <input type="checkbox" value="Tuesday" class="check" name="checks"><font>Tuesday</font>
+        <input type="checkbox" value="Wednesday" class="check" name="checks"><font>Wednesday</font>
+        <input type="checkbox" value="Thursday" class="check" name="checks"><font>Thursday</font>
+        <input type="checkbox" value="Friday" class="check" name="checks"><font>Friday</font>
+        <input type="checkbox" value="Saturday" class="check" name="checks"><font>Saturday</font>
+        <input type="checkbox" value="Sunday" class="check" name="checks"><font>Sunday</font> --}}
 
-        </label>
+        
         <br>
         <br>
         <br>

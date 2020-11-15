@@ -4,11 +4,33 @@
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
+    background-color: rgb(102, 57, 25);
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+  body{
+    background-color:rgb(102, 57, 25);
+    
+  }
+  li{
+    text-align:justify;
+  }
+  h1{
+    color:white;
+  }
+  h2{
+    color:white;
+  }
+  p{
+    /* position: absolute; */
+    color:white;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 5em;
+    /* top: 30px; */
   }
   .row{
     margin: auto;
@@ -27,8 +49,13 @@
     color:green;
     border-radius: 15px;
   }
+ .success{
+color: green;
+  }
 
-  
+  span{
+    color: white;
+  }
   /* Hide the browser's default checkbox */
   .check input {
     position: absolute;
@@ -36,6 +63,7 @@
     cursor: pointer;
     height: 0;
     width: 0;
+    color:white;
   }
   
   /* Create a custom checkbox */
@@ -45,7 +73,7 @@
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: white;
     display: flex;
   }
   
@@ -57,6 +85,7 @@
   /* When the checkbox is checked, add a blue background */
   .check input:checked ~ .checkmark {
     background-color: #2196F3;
+    color:white;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -69,6 +98,7 @@
   /* Show the checkmark when checked */
   .check input:checked ~ .checkmark:after {
     display: inline-flex;
+    color:white;
   }
   
   /* Style the checkmark/indicator */
@@ -82,6 +112,10 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+    color:white;
+  }
+  font{
+    color:white;
   }
   .btn {
     /* background-color: DodgerBlue; */
@@ -92,4 +126,6 @@
     cursor: pointer;
   }
   table, th, td {
-    border: 1px solid black;
+    border: 1px solid white;
+    color:white;
+  }
