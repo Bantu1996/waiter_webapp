@@ -38,7 +38,7 @@ module.exports = function Caffine(pool) {
     async function selectShift(days, name) {
         try {
             let waiterId = await getWaiterId(name)
-            console.log(waiterId);
+            // console.log(waiterId);
 
             if (waiterId) {
                 await resetPer(waiterId)
@@ -58,28 +58,46 @@ module.exports = function Caffine(pool) {
     }
 
     async function sevenDays() {
-        const seven = await pool.query('select days from shifts')
-        const shift = await getAdminId()
-        const rows = seven.rows
+        try {
+            const seven = await pool.query('select days from shifts')
+            const shift = await getAdminId()
+            const rows = seven.rows
+    
+            await rows.forEach(async (day) => {
+                day.waiters = []
+                // console.log((shift))
+                // console.log(rows.length)
+    
+                shift.forEach(async (waiter) => {
+                    if (day.days === waiter.days) {
+                        day.waiters.push(waiter);
+                        
+                    }
 
-        await rows.forEach(async (day) => {
-            day.waiters = []
-            // console.log((shift))
-            // console.log(rows.length)
-
-            shift.forEach(async (waiter) => {
-                if (day.days === waiter.days) {
-                    day.waiters.push(waiter)
-                }
-                else if (day.waiters === 3) {
-                    return "Awe Boss"
-                }
+                    if(day.waiters.length  === 3){
+                        day.color = "green"
+                    }
+                 else if (day.waiters.length < 3 ) {
+                    day.color = "orange"
+                 }
+                 else if(day.waiters.length > 3){
+                     day.color = "red"
+                     day.message = "day overbooked"
+                 }
+                })
             })
-        })
-        //  console.log(rows.length);
-
-        return rows;
-
+            //  console.log(rows);
+    
+            return rows;
+    
+        } catch (error) {
+           console.log(error) 
+        }
+       
+    }
+    async function waiterList() {
+        const names = await pool.query('select waiters_names from waiters')
+        return names.rows
     }
 
     async function getAdminId() {
@@ -89,30 +107,7 @@ module.exports = function Caffine(pool) {
 
         return result.rows
     }
-    async function scheduling() {
-        // await getAdminId();
-        // console.log(waiterDay);
-        elementLength
-        var waiterDay = await getAdminId()
-        for (let i = 0; i < waiterDay.length; i++) {
-
-            const element = waiterDay[i];
-            // console.log(elementLength);
-
-            var elementLength = element.length
-            // console.log(elementLength);
-            if (elementLength === 3) {
-                return { color: enough }
-            }
-            else if (element.length > 3) {
-                return { color: overbooked }
-            }
-            else if (element.length < 3) {
-                return { color: still_needed }
-            }
-
-        }
-    }
+   
 
     async function getWaiterId(name) {
         try {
@@ -169,7 +164,8 @@ module.exports = function Caffine(pool) {
         resetPer,
         sevenDays,
         getAdminId,
-        scheduling,
+        waiterList,
+        // scheduling,
         // scheduleAdmin,
         reset
     }

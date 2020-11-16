@@ -18,6 +18,15 @@
   li{
     text-align:justify;
   }
+  .green{
+    background-color: green;
+  }
+  .orange{
+    background-color: orange;
+  }
+  .red{
+    background-color: red;
+  }
   h1{
     color:white;
   }

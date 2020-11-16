@@ -4,6 +4,9 @@
   <br>
   <h2>Administration Section</h2>
   <br>
+  <h3 class="green">Enough Waiters</h3>
+   <h3 class="orange">In need of Waiters</h3>
+    <h3 class="red">Overbookes Waiters for the specified day</h3>
   <div class="rstMessage">
     <h1> {{messages.success}}</h1>
 
@@ -23,7 +26,7 @@
   <tbody>
       <tr>
 
-     <td>
+     <td style="background-color: {{this.color}};">
          {{#each this.waiters}}
        <li>
        {{this.waiters_names}}  

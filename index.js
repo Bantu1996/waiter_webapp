@@ -42,7 +42,7 @@ app.get('/addFlash', async function (req, res) {
 
 app.get("/", async function (req, res) {
   res.render('index');
-});
+ });
 app.get("/index", async function (req, res) {
   res.redirect('/')
  })
@@ -66,8 +66,10 @@ app.get("/admin", async function (req, res) {
 })
 
 app.get("/waiter/", async function (req, res) {
+  var list = await coffee.waiterList();
   var sevenNights = await coffee.sevenDays();
   res.render('waiter', { 
+    list,
     sevenNights})
 })
 app.get("/waiter/:username", async function (req, res) {
@@ -79,6 +81,21 @@ app.get("/waiter/:username", async function (req, res) {
    })
 })
 
+// app.get('/waiter', async function (req, res) {
+//   console.log(list);
+
+//       var list = await coffee.waiterList();
+
+//       res.render('waiter', {list})
+//   });
+
+
+app.get("/waitersList", async function(req, res) {
+  const list = await coffee.waiterList()
+  res.render('waitersList', {
+    list
+  })
+})
 app.post("/waiter/:username", async function (req, res) {
   var boxes = req.body.checks
   var user = req.params.username

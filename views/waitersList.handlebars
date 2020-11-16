@@ -1,0 +1,26 @@
+<div class="row">
+     <h1>Monate Café</h1>
+  <p>Where Coffee tastes like Coffee</p>
+<h2>Waiters List</h2>
+<table>
+    <tr>
+        <th>Names</th>
+    </tr>
+    {{#each waiters}}
+    <tr>
+        <li>
+        <td><a href="/waiter/{{this.waiters_names}}"> {{this.waiters_names}}</a></td>
+
+        </li>
+    </tr>
+    {{/each}}
+ 
+</table>
+   <br>
+    <br>
+    <br>
+    <hr>
+    
+  <a href="/index"><button class="hometBtn" on type="button" name="button">Homepage</button></a>
+
+</div>
