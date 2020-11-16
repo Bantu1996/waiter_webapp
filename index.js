@@ -41,37 +41,39 @@ app.get('/addFlash', async function (req, res) {
 });
 
 app.get("/", async function (req, res) {
-  res.render('index');
+   var sevenNights = await coffee.sevenDays();
+  res.render('waiter', {
+  sevenNights
  });
-app.get("/index", async function (req, res) {
-  res.redirect('/')
+});
+
+app.get("/waiter/", async function (req, res) {
+  var sevenNights = await coffee.sevenDays();
+  res.render('waiter', {
+  sevenNights
+
+  })
  })
 
 
 app.get("/admin", async function (req, res) {
-  // var user = req.params.username;
-  // var id = await coffee.scheduling()
+
   var waiters =   await coffee.getAdminId()
   var sevenNights = await coffee.sevenDays();
   // console.log(sevenNights.length);
-  
 
-  // if(sevenNights.waiters === 3){
-  //   req.flash('success', 'Awe Boss')
-  //  }
-  // console.log( waiters);
   
   res.render('admin',{
     waiters,sevenNights} )
 })
 
-app.get("/waiter/", async function (req, res) {
-  var list = await coffee.waiterList();
-  var sevenNights = await coffee.sevenDays();
-  res.render('waiter', { 
-    list,
-    sevenNights})
-})
+// app.get("/waiter/", async function (req, res) {
+//   // var list = await coffee.waiterList();
+//   var sevenNights = await coffee.sevenDays();
+//   res.render('waiter', { 
+//     // list,
+//     sevenNights})
+// })
 app.get("/waiter/:username", async function (req, res) {
   var user = req.params.username
   var sevenNights = await coffee.sevenDays();
@@ -81,37 +83,18 @@ app.get("/waiter/:username", async function (req, res) {
    })
 })
 
-// app.get('/waiter', async function (req, res) {
-//   console.log(list);
-
-//       var list = await coffee.waiterList();
-
-//       res.render('waiter', {list})
-//   });
-
-
-app.get("/waitersList", async function(req, res) {
-  const list = await coffee.waiterList()
-  res.render('waitersList', {
-    list
-  })
-})
 app.post("/waiter/:username", async function (req, res) {
   var boxes = req.body.checks
   var user = req.params.username
-  // var id = await coffee.scheduling()
-  // console.log({ boxes, user });
-  // var update = await coffee.nameUpdate(user)
+ 
    var sub = await coffee.selectShift(boxes, user)
-  // console.log(
-  //   await coffee.getAdminId()
-  // );
-
-  // if (s) {
-  //    req.flash('success', 'Bozza')
-  //    await coffee.getAdminId()
-  // }else{
-  req.flash('success', 'Successfully submitted a shift')
+ if(sub) {
+  req.flash('success', 'Successfully submitted your shifts')
+ }
+ else{
+  req.flash('error', 'Please select atleast from 2 shifts and up')
+ }
+  
   
   res.render('waiter', {
     username: user,

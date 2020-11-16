@@ -25,9 +25,15 @@ module.exports = function Caffine(pool) {
 
     async function addUser(name) {
         var namer = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-        await pool.query('insert into waiters(waiters_names) values ($1)', [namer]);
-
+        var nameChecker = await pool.query('select * from waiters where waiters_names = $1', [namer])
+        if(nameChecker.rowCount === 0){
+            await pool.query('insert into waiters(waiters_names) values ($1)', [namer]);
+        }
+var naming = await pool.query('select id from waiters where waiters_names = $1', [namer])
+return naming.rows[0].id
     }
+
+    
 
     // async function nameUpdate(name) {
     //     var names = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
