@@ -15,7 +15,7 @@ const pool = new Pool({
 });
 
 const coffee = Caffine(pool);
-// const route = routes(register)
+ const route = routes(coffee)
 
 var app = express();
 
@@ -40,87 +40,17 @@ app.get('/addFlash', async function (req, res) {
   res.redirect('/');
 });
 
-app.get("/", async function (req, res) {
-   var sevenNights = await coffee.sevenDays();
-  res.render('waiter', {
-  sevenNights
- });
-});
+app.get("/", route.waiterHome);
 
-app.get("/waiter/", async function (req, res) {
-  var sevenNights = await coffee.sevenDays();
-  res.render('waiter', {
-  sevenNights
-
-  })
- })
+app.get("/waiter/", route.waiterAgain)
 
 
-app.get("/days", async function (req, res) {
+app.get("/days", route.daysOfWeek)
+app.get("/waiter/:username",route.getUser)
 
-  var waiters =   await coffee.getAdminId()
-  var sevenNights = await coffee.sevenDays();
-  // console.log(sevenNights.length);
+app.post("/waiter/:username", route.postUser);
 
-  
-  res.render('days',{
-    waiters,sevenNights} )
-})
-
-// app.get("/waiter/", async function (req, res) {
-//   // var list = await coffee.waiterList();
-//   var sevenNights = await coffee.sevenDays();
-//   res.render('waiter', { 
-//     // list,
-//     sevenNights})
-// })
-app.get("/waiter/:username", async function (req, res) {
-  var user = req.params.username
-  var sevenNights = await coffee.sevenDays();
-  res.render('waiter', {
-   username: user,
-   sevenNights
-   })
-})
-
-app.post("/waiter/:username", async function (req, res) {
-  var boxes = req.body.checks
-  var user = req.params.username
- 
-   var sub = await coffee.selectShift(boxes, user)
- if(sub) {
-  req.flash('success', 'Successfully submitted your shifts')
- }
- else{
-  req.flash('error', 'Please select atleast from 2 shifts and up')
- }
-  
-  
-  res.render('waiter', {
-    username: user,
-    sub
-  
-  });
-
-});
-
-app.get("/resetPer", async function (req, res) {
-  var id = req.query.id  
-  var data = await coffee.resetPer(id)
-
-    req.flash('success', 'Successfully cleared a Waiter on the list')
-  res.render('days', {data})
-})
-
-  app.get("/reset", async function (req, res) {
-    await coffee.reset(),
-      req.flash('success', 'Successfully cleared the Waiters list')
-    res.redirect('/days')
-  })
-
-
-
-  // resetPer
+  app.get("/reset", route.resetting)
 
   let PORT = process.env.PORT || 3007;
 
