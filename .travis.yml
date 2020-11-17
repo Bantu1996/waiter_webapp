@@ -1,1 +1,13 @@
-[![Build Status](https://travis-ci.com/Bantu1996/waiter_webapp.svg?branch=master)](https://travis-ci.com/Bantu1996/waiter_webapp)
+language: node_js
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/waiters_db_test
+
+node_js: "12"
+
+before_script:
+  - psql -c 'create database  waiters_db_test;' -U postgres
+  - psql -U postgres -d waiters_db_test -a -f waiter_table.sql
+
+services:
+  - postgresql
