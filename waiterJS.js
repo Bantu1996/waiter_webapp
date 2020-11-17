@@ -7,21 +7,11 @@ module.exports = function Caffine(pool) {
 
             // console.log({ working_id, weekdayName, waiterId });
 
-            // checkn
-
             await pool.query("insert into admin(waiters_id, shifts_id) values($1, $2)", [waiterId, working_id])
         }
     }
 
-    // async function loopName(name) {
-    // for (let i = 0; i < name.length; i++) {
-    //     const element = name[i];
-    //     var looping = await selectShift(element)
-
-    //    return looping
-
-    // }
-    // }
+ 
 
     async function addUser(name) {
         var namer = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
@@ -33,13 +23,6 @@ var naming = await pool.query('select id from waiters where waiters_names = $1',
 return naming.rows[0].id
     }
 
-    
-
-    // async function nameUpdate(name) {
-    //     var names = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-    //     var update = await pool.query('UPDATE admin set waiters_id = waiters_id+1 WHERE shfts_id = $1', [names]);
-    //     return update;
-    // }
 
     async function selectShift(days, name) {
         try {
@@ -47,7 +30,7 @@ return naming.rows[0].id
             // console.log(waiterId);
 
             if (waiterId) {
-                await resetPer(waiterId)
+                // await resetPer(waiterId)
                 await addShifts(waiterId, days)
             } else {
                 await addUser(name)
@@ -101,10 +84,7 @@ return naming.rows[0].id
         }
        
     }
-    async function waiterList() {
-        const names = await pool.query('select waiters_names from waiters')
-        return names.rows
-    }
+   
 
     async function getAdminId() {
 
@@ -166,11 +146,12 @@ return naming.rows[0].id
         selectShift,
         gettingShifts,
         shiftId,
+        addShifts,
         addUser,
         resetPer,
         sevenDays,
         getAdminId,
-        waiterList,
+        // waiterList,
         // scheduling,
         // scheduleAdmin,
         reset

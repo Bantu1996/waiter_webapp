@@ -56,14 +56,14 @@ app.get("/waiter/", async function (req, res) {
  })
 
 
-app.get("/admin", async function (req, res) {
+app.get("/days", async function (req, res) {
 
   var waiters =   await coffee.getAdminId()
   var sevenNights = await coffee.sevenDays();
   // console.log(sevenNights.length);
 
   
-  res.render('admin',{
+  res.render('days',{
     waiters,sevenNights} )
 })
 
@@ -109,13 +109,13 @@ app.get("/resetPer", async function (req, res) {
   var data = await coffee.resetPer(id)
 
     req.flash('success', 'Successfully cleared a Waiter on the list')
-  res.render('admin', {data})
+  res.render('days', {data})
 })
 
   app.get("/reset", async function (req, res) {
     await coffee.reset(),
       req.flash('success', 'Successfully cleared the Waiters list')
-    res.redirect('/admin')
+    res.redirect('/days')
   })
 
 

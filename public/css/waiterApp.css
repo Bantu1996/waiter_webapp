@@ -19,13 +19,13 @@
     text-align:justify;
   }
   .green{
-    background-color: green;
+    color: green;
   }
   .orange{
-    background-color: orange;
+    color: orange;
   }
   .red{
-    background-color: red;
+    color: red;
   }
   h1{
     color:white;
@@ -61,7 +61,9 @@
  .success{
 color: green;
   }
-
+.error{
+  color: red;
+}
   span{
     color: white;
   }

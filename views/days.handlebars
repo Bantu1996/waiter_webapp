@@ -1,17 +1,16 @@
 <div class="row">
   <h1>Monate Café</h1>
   <p>Where Coffee tastes like Coffee</p>
-  <br>
   <h2>Administration Section</h2>
   <br>
   <h3 class="green">Enough Waiters</h3>
    <h3 class="orange">In need of Waiters</h3>
-    <h3 class="red">Overbookes Waiters for the specified day</h3>
-  <div class="rstMessage">
-    <h1> {{messages.success}}</h1>
+    <h3 class="red">Overbooked Waiters for the specified day</h3>
+  {{!-- <div class="rstMessage"> --}}
+    <h1 class="success"> {{messages.success}}</h1>
 
 
-  </div>
+  {{!-- </div> --}}
 
   {{!-- <h1>{{this.username}}</h1> --}}
    <table style="width:100%" class="tables">
@@ -26,7 +25,7 @@
   <tbody>
       <tr>
 
-     <td style="background-color: {{this.color}};">
+     <td style="color: {{this.color}};">
          {{#each this.waiters}}
        <li>
        {{this.waiters_names}}  
