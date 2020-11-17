@@ -1,5 +1,6 @@
 const Caffine = require('./waiterJS');
 // let app = express();
+const routes = require('./routes');
 const flash = require('express-flash');
 const session = require('express-session');
 const express = require('express');
@@ -13,11 +14,11 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://bantu:s0ty@t0
 const pool = new Pool({
   connectionString
 });
+var app = express();
 
 const coffee = Caffine(pool);
- const route = routes(coffee)
+ const route = routes(coffee);
 
-var app = express();
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
@@ -40,12 +41,12 @@ app.get('/addFlash', async function (req, res) {
   res.redirect('/');
 });
 
-app.get("/", route.waiterHome);
+app.get("/", route.waiter);
 
 app.get("/waiter/", route.waiterAgain)
 
-
 app.get("/days", route.daysOfWeek)
+
 app.get("/waiter/:username",route.getUser)
 
 app.post("/waiter/:username", route.postUser);
