@@ -24,3 +24,7 @@ insert into shifts(days) values ('Thursday');
 insert into shifts(days) values ('Friday');
 insert into shifts(days) values ('Saturday');
 insert into shifts(days) values ('Sunday');
+
+--   select days from admin 
+--   join  shifts on admin.shifts_id = shifts.id 
+--     join waiters on admin.waiters_id = waiters.id where waiters_names='Bantu';

@@ -13,36 +13,21 @@
     <div class="notification">
 
     </div>
-    {{!-- <div class="entry">
-        <h1> {{messages.error}}</h1>
-    </div> --}}
-    {{!-- <div class="rstMessage"> --}}
-        {{!-- <h2>{{messages}}</h2> --}}
+
         <h2 class="success"> {{messages.success}}</h2>
         <h2 class="error">{{messages.error}}</h2>
-    {{!-- </div> --}}
-    {{!-- <div class="sis">
-        {{messages.regError}}
-    </div> --}}
+ 
 
 
     <form action="/waiter/{{username}}" method="POST">
 
-{{!-- <input type="checkbox" name="check" class="check"> --}}
-{{#each sevenNights}}  
-{{!-- {{sevenNights.days}} --}}
-{{!-- {{/each}} --}}
-{{!-- </input> --}}
-         <input type="checkbox" value="{{this.days}}"  class="check" name="checks">
-        <span > {{this.days}}</span>
-        {{/each}}
-        {{!-- <input type="checkbox" value="Tuesday" class="check" name="checks"><font>Tuesday</font>
-        <input type="checkbox" value="Wednesday" class="check" name="checks"><font>Wednesday</font>
-        <input type="checkbox" value="Thursday" class="check" name="checks"><font>Thursday</font>
-        <input type="checkbox" value="Friday" class="check" name="checks"><font>Friday</font>
-        <input type="checkbox" value="Saturday" class="check" name="checks"><font>Saturday</font>
-        <input type="checkbox" value="Sunday" class="check" name="checks"><font>Sunday</font> --}}
 
+{{#each sevenDays}}
+
+         <input type="checkbox" value="{{this.days}}"  {{checked}} class="check"  name="checks" >
+        <span class="check" > {{this.days}} </span>
+    
+        {{/each}}
         
         <br>
         <br>
@@ -50,28 +35,24 @@
         <a href=""><button type="submit" class="subButn">Submit</button></a>
 
     </form>
-    {{!-- <form action="/filter" method="POST">
-        <strong>Filter:</strong>
-        <input class="towns" name="placesFilter" type="radio" value="All">Show All
-        <input class="towns" name="placesFilter" type="radio" value="CY">Bellville
-        <input class="towns" name="placesFilter" type="radio" value="CJ">Paarl
-        <input class="towns" name="placesFilter" type="radio" value="CA">Cape Town
-        <button type="submit" class="filBtn">Filter</button>
-    </form> --}}
-
-    {{!-- <a href="/index"><button class="hometBtn" on type="button" name="button">Homepage</button></a> --}}
+ 
     <br>
     <br>
     <hr>
 
 
     <h1>{{username}}</h1>
-    {{!-- {{#each d}}
-    <div class="regNumbersList">
-        <li>
-            {{this.days}}
-        </li>
-    </div>
-    {{/each}} --}}
+  
 
 </div>
+
+
+<script>
+  setTimeout(function() {
+    document.querySelector('.success').innerHTML = ""; 
+    document.querySelector('.error').innerHTML = "";
+   
+
+  }, 3000);
+</script>
+

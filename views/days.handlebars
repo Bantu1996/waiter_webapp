@@ -9,34 +9,28 @@
   {{!-- <div class="rstMessage"> --}}
     <h1 class="success"> {{messages.success}}</h1>
 
-
-  {{!-- </div> --}}
-
-  {{!-- <h1>{{this.username}}</h1> --}}
    <table style="width:100%" class="tables">
     <thead>
     <tr>
        {{#each sevenNights}} 
-      <th> {{this.days}}</th>
+      <th  style="background-color: {{this.color}};"> {{this.days}}</th>
+      {{/each}}
     </tr>
     
        
     </thead>
   <tbody>
       <tr>
-
-     <td style="color: {{this.color}};">
+ {{#each sevenNights}} 
+     <td  style="color: {{this.color}}">
          {{#each this.waiters}}
        <li>
        {{this.waiters_names}}  
-        {{!-- <a href="/resetPer"><button class="btn"><i class="fa fa-close"></i>{{data}}</button></a> --}}
        </li>
-         
-       
       {{/each}}
          </td>
+         {{/each}}
     </tr>
-      {{/each}}
   </tbody>
   
   
@@ -79,7 +73,11 @@
 
 </div>
 
-
+<script>
+  setTimeout(function() {
+    document.querySelector('.success').innerHTML = "";
+  }, 3000);
+</script>
 
 
 

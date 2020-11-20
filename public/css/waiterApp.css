@@ -4,7 +4,7 @@
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    background-color: rgb(102, 57, 25);
+    background-color: white;
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -12,7 +12,7 @@
     user-select: none;
   }
   body{
-    background-color:rgb(102, 57, 25);
+    background-color:white;
     
   }
   li{
@@ -28,14 +28,14 @@
     color: red;
   }
   h1{
-    color:white;
+    color:black;
   }
   h2{
-    color:white;
+   color:black;
   }
   p{
     /* position: absolute; */
-    color:white;
+   color:black;
     text-align: center;
     font-size: 18px;
     margin-bottom: 5em;
@@ -65,7 +65,7 @@ color: green;
   color: red;
 }
   span{
-    color: white;
+    color: black;
   }
   /* Hide the browser's default checkbox */
   .check input {
@@ -74,7 +74,8 @@ color: green;
     cursor: pointer;
     height: 0;
     width: 0;
-    color:white;
+   color:black;
+
   }
   
   /* Create a custom checkbox */
@@ -96,7 +97,7 @@ color: green;
   /* When the checkbox is checked, add a blue background */
   .check input:checked ~ .checkmark {
     background-color: #2196F3;
-    color:white;
+   color:black;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -109,7 +110,7 @@ color: green;
   /* Show the checkmark when checked */
   .check input:checked ~ .checkmark:after {
     display: inline-flex;
-    color:white;
+   color:black;
   }
   
   /* Style the checkmark/indicator */
@@ -123,10 +124,10 @@ color: green;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    color:white;
+   color:black;
   }
   font{
-    color:white;
+   color:black;
   }
   .btn {
     /* background-color: DodgerBlue; */
@@ -137,6 +138,16 @@ color: green;
     cursor: pointer;
   }
   table, th, td {
-    border: 1px solid white;
-    color:white;
+    border: 1px solid black;
+
+   color:black;
+  }
+
+  @media only screen and (min-width:414px){
+    table, th, td {
+      border: 1px solid black;
+      margin: auto;
+  
+     color:black;
+    }
   }

@@ -1,15 +1,21 @@
 module.exports = function routes(coffee){
 
 const waiter = async function (req, res) {
-    var sevenNights = await coffee.sevenDays();
+    // var sevenNights = await coffee.sevenDays();
+    var sevenDays = await coffee.sevenDaysWaiter();
+   
    res.render('waiter', {
-   sevenNights
-  });
- }
+    //  sevenNights
+sevenDays
+   })
+};
+ 
  const waiterAgain = async function (req, res) {
-    var sevenNights = await coffee.sevenDays();
+    // var sevenNights = await coffee.sevenDays();
+     var sevenDays = await coffee.sevenDaysWaiter();
     res.render('waiter', {
-    sevenNights
+    // sevenNights
+    sevenDays
   
     })
    }
@@ -27,16 +33,24 @@ const daysOfWeek = async function (req, res) {
 
   const getUser =  async function (req, res) {
     var user = req.params.username
-    var sevenNights = await coffee.sevenDays();
+    // var sevenNights = await coffee.sevenDays();
+    var sevenDays = await coffee.sevenDaysWaiter(user);
+
+    //  console.log(sevenDays);
+     
     res.render('waiter', {
      username: user,
-     sevenNights
+      sevenDays
+      // , sevenNights
+     
      })
   }
 
   const postUser = async function (req, res) {
     var boxes = req.body.checks
     var user = req.params.username
+      var sevenDays = await coffee.sevenDaysWaiter();
+
    
      var sub = await coffee.selectShift(boxes, user)
    if(sub) {
@@ -49,7 +63,8 @@ const daysOfWeek = async function (req, res) {
     
     res.render('waiter', {
       username: user,
-      sub
+      sub,
+     sevenDays
     
     });
   

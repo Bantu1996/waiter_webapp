@@ -18,16 +18,50 @@ describe('Waiter Availability', function () {
 
   beforeEach(async function () {
     // clean the tables before each test run
-    await pool.query("delete from admin");
+    await pool.query("delete from admin; delete from waiters");
 
   });
 
-  // it("should be able to enter a name", async function () {
-  //   await coffee.addShifts("Bantu")
-  //   var num = await coffee.selectShift("Bantu");
-  //   assert.equal(1, num);
-  //   // console.log(num);
-  // });
+  it("should be able to enter a name", async function () {
+
+    await coffee.addUser("Bantu")
+    await coffee.addUser("Siya")
+    await coffee.addUser("Bibo")
+    await coffee.addUser("Moonlight")
+    await coffee.addUser("Makho")
+    await coffee.addUser("Sandile")
+    await coffee.addUser("Bhuda")
+    await coffee.addUser("Ban")
+    var num = await coffee.getNames();
+    assert.deepEqual([
+      {
+        waiters_names: 'Bantu'
+      },
+      {
+        waiters_names: 'Siya'
+      },
+      {
+        waiters_names: 'Bibo'
+      },
+      {
+        waiters_names: 'Moonlight'
+      },
+      {
+        waiters_names: 'Makho'
+      },
+      {
+        waiters_names: 'Sandile'
+      },
+      {
+        waiters_names: 'Bhuda'
+      },
+      {
+        waiters_names: 'Ban'
+      }
+
+    ], num);
+    console.log(num);
+  });
 
   it("should be able to select shifts as a waiter", async function () {
 
@@ -71,14 +105,37 @@ describe('Waiter Availability', function () {
 
 
 
-  it("should be able to get  waiter_id  and  shifts_id ", async function () {
+  it("should be able to get waiters_id ", async function () {
 
-    const num = await coffee.getAdminId();
-    assert.deepEqual([], num);
-    console.log(num);
+    await coffee.sevenDaysWaiter()
+    await coffee.addUser("Miranda");
+    const waiterid = await coffee.getWaiterId("Miranda");
+    const testQuery = await pool.query('select id from waiters where waiters_names = $1', ["Miranda"])
+    assert.equal(testQuery.rows[0].id, waiterid);
+    // console.log(num);
+  });
+
+  it("should be able to get shifts_id ", async function () {
+
+    await coffee.sevenDaysWaiter()
+    await coffee.addUser("Miranda");
+    const waiterid = await coffee.getWaiterId("Miranda");
+    const testQuery = await pool.query('select id from waiters where waiters_names = $1', ["Miranda"])
+    assert.equal(testQuery.rows[0].id, waiterid);
+    // console.log(num);
   });
 
 
+
+  it("should be able to reset the waiter availabilty app", async function () {
+
+    await coffee.addUser("Bantu")
+    await coffee.addUser("Chuma")
+    await coffee.addUser("Sibo")
+    await coffee.reset();
+    const num = await coffee.getNames();
+    assert.equal(0, num)
+  })
 
   after(function () {
     pool.end();
