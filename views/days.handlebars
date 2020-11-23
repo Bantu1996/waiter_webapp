@@ -7,19 +7,16 @@
    <h3 class="orange">In need of Waiters</h3>
     <h3 class="red">Overbooked Waiters for the specified day</h3>
   {{!-- <div class="rstMessage"> --}}
+    <br>
     <h1 class="success"> {{messages.success}}</h1>
 
    <table style="width:100%" class="tables">
-    <thead>
+   
     <tr>
        {{#each sevenNights}} 
       <th  style="background-color: {{this.color}};"> {{this.days}}</th>
       {{/each}}
     </tr>
-    
-       
-    </thead>
-  <tbody>
       <tr>
  {{#each sevenNights}} 
      <td  style="color: {{this.color}}">
@@ -31,7 +28,7 @@
          </td>
          {{/each}}
     </tr>
-  </tbody>
+  
   
   
   </table>

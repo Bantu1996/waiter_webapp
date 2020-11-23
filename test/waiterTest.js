@@ -132,9 +132,7 @@ describe('Waiter Availability', function () {
 
     
     const color = await coffee.sevenDays()
-    // const colorWaiter = await coffee.sevenDaysWaiter()
-    // const colorTable = await pool.query('select days, waiters_names from admin join shifts on admin.shifts_id = shifts.id join waiters on admin.waiters_id = waiters.id ORDER BY shifts.id ASC')
-
+   
     assert.deepEqual( [
       {
       "color": "green",

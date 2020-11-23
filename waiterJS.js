@@ -111,7 +111,7 @@ module.exports = function Caffine(pool) {
         try {
             const seven = await pool.query('select days from shifts')
             const shift = await getAdminId()
-            //  console.log(shift);
+             console.log(shift);
             
             const rows = seven.rows
 
