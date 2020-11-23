@@ -24,9 +24,9 @@
  {{#each sevenNights}} 
      <td  style="color: {{this.color}}">
          {{#each this.waiters}}
-       <li>
+       <ul>
        {{this.waiters_names}}  
-       </li>
+       </ul>
       {{/each}}
          </td>
          {{/each}}
@@ -36,41 +36,7 @@
   
   </table>
 
-
-
-
-
- {{!-- <table style="width:100%" class="tables">
-  <thead>
-    <tr>
-     {{#each sevenNights}}
-     <th>{{this.days}}</th>
-     {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      {{#each this.waiters}}
-      <td>
-        <ul>
-          {{#each this.waiters}}
-          <li>
-            {{this.waiters_names}}
-          </li>
-          {{/each}}
-        </ul>
-
-      </td>
-      {{/each}}
-    </tr>
-  </tbody>
-</table>  --}}
-
-
-
   <a href="/reset"><button class="resetBtn" on type="button" name="button">Clear List</button></a>
-  {{!-- <a href="/index"><button class="hometBtn" on type="button" name="button">Homepage</button></a> --}}
-
 </div>
 
 <script>

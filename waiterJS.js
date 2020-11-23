@@ -12,6 +12,9 @@ module.exports = function Caffine(pool) {
 
 
     async function addUser(name) {
+        // var regNames = /^[a-zA-Z]+$/;
+        // newRegex = RegExp(regNames)
+        // regTest = newRegex.test(name)
         var namer = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         var nameChecker = await pool.query('select * from waiters where waiters_names = $1', [namer])
         if (nameChecker.rowCount === 0) {
@@ -51,15 +54,17 @@ module.exports = function Caffine(pool) {
             const seven = await pool.query('select days from shifts')
             const userId = await getWaiterId(name)
             const shift = await getWaiterShifts(userId) || []
-        //  console.log(shift);
+         console.log(shift);
 
             const rows = seven.rows
             await rows.forEach(async (day) => {
-                console.log(day);
+             //   console.log(day);
                 
                 day.waiters = []
                 day.checked = '';
                 shift.forEach(async (waiter) => {
+                    console.log(waiter);
+                    
                     if (day.days === waiter.days) {
                         day.checked = 'checked'
 
@@ -156,6 +161,9 @@ module.exports = function Caffine(pool) {
 
     async function getWaiterId(name) {
         try {
+            // var regNames = /^[a-zA-Z]+$/;
+            // newRegex = RegExp(regNames)
+            // regTest = newRegex.test(name)
             var namer = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
             const results = await pool.query('select id from waiters where waiters_names = $1', [namer])
             // console.log(naam);

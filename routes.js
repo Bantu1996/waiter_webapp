@@ -2,22 +2,15 @@ module.exports = function routes(coffee){
 
 const waiter = async function (req, res) {
     // var sevenNights = await coffee.sevenDays();
-    var sevenDays = await coffee.sevenDaysWaiter();
+    // var sevenDays = await coffee.sevenDaysWaiter();
    
-   res.render('waiter', {
-    //  sevenNights
-sevenDays
-   })
+   res.render('landingPage')
 };
  
  const waiterAgain = async function (req, res) {
     // var sevenNights = await coffee.sevenDays();
-     var sevenDays = await coffee.sevenDaysWaiter();
-    res.render('waiter', {
-    // sevenNights
-    sevenDays
-  
-    })
+    //  var sevenDays = await coffee.sevenDaysWaiter();
+    res.render('landingPage')
    }
 
 const daysOfWeek = async function (req, res) {
