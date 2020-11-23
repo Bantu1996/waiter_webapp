@@ -55,6 +55,8 @@ module.exports = function Caffine(pool) {
 
             const rows = seven.rows
             await rows.forEach(async (day) => {
+                console.log(day);
+                
                 day.waiters = []
                 day.checked = '';
                 shift.forEach(async (waiter) => {
@@ -87,9 +89,6 @@ module.exports = function Caffine(pool) {
     }
 
 
-
-
-
     async function checkedNames(name) {
         try {
             const checker = await pool.query('select days from admin join  shifts on admin.shifts_id = shifts.id  join waiters on admin.waiters_id = waiters.id where waiters_names=$1', [name]);
@@ -107,6 +106,8 @@ module.exports = function Caffine(pool) {
         try {
             const seven = await pool.query('select days from shifts')
             const shift = await getAdminId()
+            //  console.log(shift);
+            
             const rows = seven.rows
 
             await rows.forEach(async (day) => {
@@ -118,7 +119,7 @@ module.exports = function Caffine(pool) {
                     if (day.days === waiter.days) {
                         day.waiters.push(waiter);
 
-                        console.log(day.waiters);
+                        // console.log(day.waiters);
                     }
 
                     if (day.waiters.length === 3) {
@@ -133,7 +134,7 @@ module.exports = function Caffine(pool) {
                     }
                 })
             })
-            //  console.log(rows);
+             console.log(rows);
 
             return rows;
 
@@ -171,9 +172,6 @@ module.exports = function Caffine(pool) {
                 var dayQuery = await pool.query("select id from shifts where days = $1", [day])
                 let working_id = dayQuery.rows[0].id;
                 return working_id;
-            // }
-            //      if (working_id.length < 1) {
-            //         return "please select more than one days";
             }
 
         } catch (error) {
@@ -181,11 +179,7 @@ module.exports = function Caffine(pool) {
 
         }
     }
-    // async function scheduleAdmin() {
-    //     array.forEach(element => {
-
-    //     });
-    // }
+   
     async function gettingShifts() {
         var list = await pool.query('SELECT days FROM shifts')
         return list.rows;

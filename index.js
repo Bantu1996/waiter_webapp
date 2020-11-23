@@ -53,7 +53,7 @@ app.post("/waiter/:username", route.postUser);
 
   app.get("/reset", route.resetting)
 
-  let PORT = process.env.PORT || 3007;
+  let PORT = process.env.PORT || 3008;
 
   app.listen(PORT, function () {
     console.log('App starting on port', PORT);

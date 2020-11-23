@@ -115,18 +115,132 @@ describe('Waiter Availability', function () {
     // console.log(num);
   });
 
-  it("should be able to get shifts_id ", async function () {
+  it("should be able to get day_id ", async function () {
 
     await coffee.sevenDaysWaiter()
-    await coffee.addUser("Miranda");
-    const waiterid = await coffee.getWaiterId("Miranda");
-    const testQuery = await pool.query('select id from waiters where waiters_names = $1', ["Miranda"])
-    assert.equal(testQuery.rows[0].id, waiterid);
+    const shiftId = await coffee.shiftId("Monday");
+    const testQuery = await pool.query('select id from shifts where days = $1', ['Monday'])
+    assert.equal(testQuery.rows[0].id, shiftId);
     // console.log(num);
   });
 
+  it("should be able to add colors table", async function () {
+    await coffee.selectShift(["Monday"], "Bantu")
+    await coffee.selectShift(["Monday"], "Charl")
+    await coffee.selectShift(["Monday"], "Chuma")
+  
 
+    
+    const color = await coffee.sevenDays()
+    // const colorWaiter = await coffee.sevenDaysWaiter()
+    // const colorTable = await pool.query('select days, waiters_names from admin join shifts on admin.shifts_id = shifts.id join waiters on admin.waiters_id = waiters.id ORDER BY shifts.id ASC')
 
+    assert.deepEqual( [
+      {
+      "color": "green",
+        "days": "Monday",
+       "waiters": [],
+      "waiters": [
+        {
+          "days": "Monday",
+          "waiters_names": "Bantu"
+        },
+        {
+          "days": "Monday",
+          "waiters_names": "Charl"
+        },
+        {
+          "days": "Monday",
+          "waiters_names": "Chuma"
+        },
+      ]
+      },
+      {
+      "color": "orange",
+        "days": "Tuesday",
+        "waiters": []
+      },
+      {
+      "color": "orange",
+        "days": "Wednesday",
+        "waiters": []
+      },
+      {
+      "color": "orange",
+        "days": "Thursday",
+        "waiters": []
+      },
+      {
+      "color": "orange",
+        "days": "Friday",
+        "waiters": []
+      },
+      {
+      "color": "orange",
+        "days": "Saturday",
+        "waiters": []
+      },
+      {
+      "color": "orange",
+        "days": "Sunday",
+        "waiters": []
+      }
+    ], color)
+    // assert.deepEqual([], colorWaiter)
+    
+    // console.log(colorWaiter);
+
+  })
+
+   it("should be able to identify checked days", async function () {
+
+      await coffee.selectShift(["Monday"], "Bantu")
+      await coffee.selectShift(["Monday"], "Charl")
+      await coffee.selectShift(["Monday"], "Chuma")
+    
+      const checkedWaiter = await coffee.sevenDaysWaiter()
+  
+      assert.deepEqual( [
+        {
+          checked: '',
+          days: 'Monday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Tuesday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Wednesday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Thursday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Friday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Saturday',
+          waiters: []
+        },
+        {
+          checked: '',
+          days: 'Sunday',
+          waiters: []
+        }
+      ], checkedWaiter)
+    
+  
+    })
+ 
   it("should be able to reset the waiter availabilty app", async function () {
 
     await coffee.addUser("Bantu")
