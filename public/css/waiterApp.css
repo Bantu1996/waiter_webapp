@@ -33,6 +33,11 @@
   h2{
    color:black;
   }
+  .resetBtn{
+    background-color: black;
+    color: white;
+    padding: 15px;
+  }
   p{
     /* position: absolute; */
    color:black;
@@ -129,13 +134,10 @@ color: green;
   font{
    color:black;
   }
-  .btn {
-    /* background-color: DodgerBlue; */
-    /* border: none; */
-     color:red; 
-    padding: 1px 5px;
-    font-size: 16px;
-    cursor: pointer;
+  .subButn {
+    background-color: black;
+    color: white;
+    padding: 15px;
   }
   table, td, th {  
     border: 1px solid #ddd;

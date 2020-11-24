@@ -1,7 +1,7 @@
 module.exports = function Caffine(pool) {
 
     async function addShifts(waiterId, days) {
-     await pool.query('delete from admin where waiters_id = $1', [waiterId] )
+        await pool.query('delete from admin where waiters_id = $1', [waiterId])
         for (let i = 0; i < days.length; i++) {
             const weekdayName = days[i];
             var working_id = await shiftId(weekdayName)
@@ -23,7 +23,7 @@ module.exports = function Caffine(pool) {
         var naming = await pool.query('select id from waiters where waiters_names = $1', [namer])
         return naming.rows[0].id
         // console.log(naming.rows[0].id);
-        
+
     }
 
 
@@ -54,25 +54,25 @@ module.exports = function Caffine(pool) {
             const seven = await pool.query('select days from shifts')
             const userId = await getWaiterId(name)
             const shift = await getWaiterShifts(userId) || []
-         console.log(shift);
+            console.log(shift);
 
             const rows = seven.rows
             await rows.forEach(async (day) => {
-             //   console.log(day);
-                
+                //   console.log(day);
+
                 day.waiters = []
                 day.checked = '';
                 shift.forEach(async (waiter) => {
                     console.log(waiter);
-                    
+
                     if (day.days === waiter.days) {
                         day.checked = 'checked'
 
                     }
                     if (day.days === waiter.days) {
                         day.waiters.push(waiter);
-                    }      
-                    
+                    }
+
                 })
             })
             return rows;
@@ -80,51 +80,33 @@ module.exports = function Caffine(pool) {
             // console.log(shift)
         }
     }
-    
+
 
     async function getWaiterShifts(id) {
         try {
             const result = await pool.query('select days from admin join shifts on admin.shifts_id = shifts.id join waiters on admin.waiters_id = waiters.id where waiters_id = $1 ORDER BY shifts.id ASC', [id])
             return result.rows
-            
+
         } catch (error) {
             // console.log(result.rows);
-            
+
         }
     }
-
-
-    async function checkedNames(name) {
-        try {
-            const checker = await pool.query('select days from admin join  shifts on admin.shifts_id = shifts.id  join waiters on admin.waiters_id = waiters.id where waiters_names=$1', [name]);
-            return checker.rows
-            
-        } catch (error) {
-            // console.log(checker.rows);
-            
-        }
-
-    }
-
 
     async function sevenDays() {
         try {
             const seven = await pool.query('select days from shifts')
             const shift = await getAdminId()
-             console.log(shift);
-            
+            console.log(shift);
+
             const rows = seven.rows
 
             await rows.forEach(async (day) => {
                 day.waiters = []
-                // console.log((shift))
-                // console.log(rows.length)
 
                 shift.forEach(async (waiter) => {
                     if (day.days === waiter.days) {
                         day.waiters.push(waiter);
-
-                        // console.log(day.waiters);
                     }
 
                     if (day.waiters.length === 3) {
@@ -139,7 +121,7 @@ module.exports = function Caffine(pool) {
                     }
                 })
             })
-             console.log(rows);
+            console.log(rows);
 
             return rows;
 
@@ -187,7 +169,7 @@ module.exports = function Caffine(pool) {
 
         }
     }
-   
+
     async function gettingShifts() {
         var list = await pool.query('SELECT days FROM shifts')
         return list.rows;
@@ -210,7 +192,6 @@ module.exports = function Caffine(pool) {
         addUser,
         sevenDays,
         getAdminId,
-        checkedNames,
         getNames,
         sevenDaysWaiter,
         getWaiterShifts,
